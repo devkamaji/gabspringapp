@@ -1,13 +1,14 @@
 package br.gabspringapp.controller;
 
-import br.com.gabspring.annotations.GabBody;
-import br.com.gabspring.annotations.GabController;
-import br.com.gabspring.annotations.GabGetMethod;
-import br.com.gabspring.annotations.GabPostMethod;
+import br.com.gabspring.annotations.*;
 import br.gabspringapp.model.Produto;
+import br.gabspringapp.service.IServiceExample;
 
 @GabController
 public class TestController {
+
+    @GabInjected
+    private IServiceExample serviceExample;
 
     @GabGetMethod(path = "/test")
     public String test() {
@@ -23,5 +24,10 @@ public class TestController {
     public String cadastrarProduto(@GabBody Produto produto) {
         System.out.println(produto);
         return "Produto cadastrado!";
+    }
+
+    @GabGetMethod(path = "/service")
+    public String getServiceMessage() {
+        return serviceExample.getMessage();
     }
 }
